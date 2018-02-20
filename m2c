@@ -1,0 +1,75 @@
+#!/bin/bash
+
+cd "$PWD/bin"
+
+if [ $# -eq 0 ]
+  then
+    ./magento cache:flush
+    exit
+fi
+
+caches=''
+for cache in "$@"
+do
+    case ${cache} in
+        # Cleaning
+        a|all)
+            caches=""
+            ;;
+        c|cnf|conf|config)
+            caches="$caches config"
+            ;;
+        l|lay|layout)
+            caches="$caches layout"
+            ;;
+        bh|b_h|block_html)
+            caches="$caches block_html"
+            ;;
+        co|col|collections)
+            caches="$caches collections"
+            ;;
+        r|ref|refl|reflection)
+            caches="$caches reflection"
+            ;;
+        d|db|db_|db_ddl)
+            caches="$caches db_ddl"
+            ;;
+        e|ea|eav)
+            caches="$caches eav"
+            ;;
+        cn|c_n|customer_notification)
+            caches="$caches customer_notification"
+            ;;
+        fp|f_p|full_page)
+            caches="$caches full_page"
+            ;;
+        ci|c_i|config_integration)
+            caches="$caches config_integration"
+            ;;
+        cia|c_i_a|config_integration_api)
+            caches="$caches config_integration_api"
+            ;;
+        t|tr|tra|trans|transl|translate)
+            caches="$caches translate"
+            ;;
+        cw|c_w|config_webservice)
+            caches="$caches config_webservice"
+           ;;
+        # Stats
+        s|stat|stats)
+            ./magento cache:status
+            exit
+            ;;
+        # Managing
+        da|disa|disall|disable|disable_all)
+            ./magento cache:disable config layout block_html collections reflection db_ddl eav customer_notification full_page config_integration config_integration_api translate config_webservice
+            exit
+            ;;
+        ena|enall|enable|enable_all)
+            ./magento cache:enable config layout block_html collections reflection db_ddl eav customer_notification full_page config_integration config_integration_api translate config_webservice
+            exit
+            ;;
+    esac
+done
+
+./magento cache:clean ${caches}
