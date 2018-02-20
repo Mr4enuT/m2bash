@@ -1,5 +1,10 @@
 #!/bin/bash
 
+build='master'
+# Download the files
+wget "https://raw.githubusercontent.com/Mr4enuT/m2bash/$build/m2c"
+wget "https://raw.githubusercontent.com/Mr4enuT/m2bash/$build/m2c_completion"
+
 bashPath='/usr/local/bin'
 completionPath='/usr/local/etc/bash_completion.d'
 bashFiles=('m2c')
@@ -32,3 +37,4 @@ do
     fi
 done
 format 'Done!'
+format 'You are ready now!'
