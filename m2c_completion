@@ -1,0 +1,14 @@
+_m2c()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="a all c cnf conf config l lay layout bh b_h bl_ht block_html co col collections r ref refl reflection d db db_ db_ddl e ea eav cn c_n customer_notification fp f_p full_page ci c_i config_integration cia c_i_a config_integration_api t tr tra trans transl translate cw c_w config_webservice s stat stats da disa disall disable disable_all ena enall enable enable_all"
+
+    if [[ ${cur} == -* ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+}
+complete -F _m2c m2c
